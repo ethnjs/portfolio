@@ -19,8 +19,7 @@ export default function CourseworkTable() {
       <h4 className="font-bold text-[1.2rem] text-white border-b border-[#333] pb-2 mb-4">
         notable coursework
       </h4>
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse mt-6">
+      <table className="w-full border-collapse mt-6">
           <thead>
             <tr className="border-b border-[#333]">
               <th className="text-[#888] font-bold text-[0.8rem] pb-4 uppercase text-left w-[60%]">
@@ -57,7 +56,6 @@ export default function CourseworkTable() {
             ))}
           </tbody>
         </table>
-      </div>
     </div>
   );
 }

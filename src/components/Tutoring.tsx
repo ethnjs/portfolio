@@ -7,8 +7,8 @@ export default function TutoringSection() {
   ];
 
   return (
-    <section id="tutoring" className="py-16 border-b border-[#222] max-w-[800px] mx-auto px-8">
-      <h2 className="text-[2.5rem] font-bold text-white text-center mb-8">
+    <section id="tutoring" className="py-16 border-b border-[#222] max-w-[800px] mx-auto">
+      <h2>
         private tutoring
       </h2>
       <p className="text-center text-[1.1rem] text-[#ccc] mb-6">

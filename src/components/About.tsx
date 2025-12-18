@@ -1,9 +1,48 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import CourseworkTable from "./CourseworkTable";
 
 export default function About() {
+  
+  const gpaRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const finalGpa = 4.78;
+    const element = gpaRef.current;
+    if (!element) return;
+
+    const startCountUp = () => {
+      let start = 0;
+      const duration = 2000;
+      let current = start;
+      const increment = finalGpa / (duration / 10);
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= finalGpa) {
+          clearInterval(timer);
+          element.textContent = finalGpa.toFixed(2);
+        } else {
+          element.textContent = current.toFixed(2);
+        }
+      }, 10);
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        startCountUp();
+        observer.unobserve(element);
+      }
+    }, { threshold: 0.5 });
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, []);
+  
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -37,14 +76,14 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-16 border-b border-[#222] max-w-[800px] mx-auto px-8">
+    <section id="about" className="py-16 border-b border-[#222] max-w-[800px] mx-auto">
       {/* Main Header */}
-      <h2 className="text-[2.5rem] font-bold text-white text-center mb-8">
+      <h2>
         about me
       </h2>
       
       {/* Intro Paragraph */}
-      <p className="text-[1.1rem] text-[#ccc] mb-6 leading-relaxed">
+      <p>
         hi, i'm ethan shih, a recent high school graduate and an incoming student
         at UCI studying Computer Science and Engineering (CSE). i'm a curious
         student who loves exploring how things work. my favorites are computers,
@@ -56,7 +95,7 @@ export default function About() {
 
       {/* Qualifications Wrapper */}
       <div className="mt-16 pt-12">
-        <h3 className="text-[1.8rem] font-bold text-white text-center mb-10">
+        <h3>
           my qualifications
         </h3>
 
@@ -72,7 +111,9 @@ export default function About() {
               glen a wilson high school
             </p>
             <p className="text-[2.5rem] font-bold text-white leading-[1.2]">
-              4.78 <span className="text-2xl">/ 4.0</span>
+              {/* Added the ref here and set initial value to 0.00 */}
+              <span ref={gpaRef}>0.00</span> 
+              <span className="text-2xl"> / 4.0</span>
             </p>
             <p className="text-[0.8rem] text-[#666] italic mt-2">
               (not including band or pe)
@@ -89,24 +130,30 @@ export default function About() {
                 <div key={index} className="border-b border-dotted border-[#222] last:border-0">
                   <button
                     onClick={() => toggleAccordion(index)}
-                    className="w-full text-left py-4 text-base text-[#ccc] hover:text-white transition-colors relative pl-6"
+                    aria-expanded={openIndex === index}
+                    className="w-full text-left py-4 text-base text-[#ccc] hover:text-white transition-colors duration-300 relative pl-6"
                   >
-                    {/* The +/- Icon */}
                     <span 
-                      className={`absolute left-0 top-1/2 -translate-y-1/2 text-[1.2rem] text-[#666] transition-transform duration-300 ${openIndex === index ? 'rotate-45' : ''}`}
+                      className={`absolute left-0 top-1/2 -translate-y-1/2 text-[1.2rem] text-[#666] transition-transform duration-500 ease-in-out ${openIndex === index ? 'rotate-45' : ''}`}
                     >
                       +
                     </span>
                     {item.title}
                   </button>
                   
-                  {/* Dropdown Content */}
+                  {/* DYNAMIC HEIGHT CONTAINER */}
                   <div 
-                     className={`overflow-hidden transition-[max-height] duration-400 ease-out ${openIndex === index ? 'max-h-[500px]' : 'max-h-0'}`}
+                    ref={(el) => (contentRefs.current[index] = el)}
+                    style={{ 
+                        maxHeight: openIndex === index ? `${contentRefs.current[index]?.scrollHeight}px` : '0px' 
+                    }}
+                    className="overflow-hidden transition-[max-height] duration-500 ease-out"
                   >
-                    <ul className="pl-10 pb-4 list-disc text-[#888] text-[0.95rem] space-y-2">
+                    <ul className="pl-10 space-y-4">
                       {item.details.map((detail, i) => (
-                        <li key={i}>{detail}</li>
+                        <li key={i} className="pb-4 border-b border-dotted border-[#222] last:boarder-0 text-[#888] text-[0.95rem] leading-relaxed">
+                          {detail}
+                        </li>
                       ))}
                     </ul>
                   </div>

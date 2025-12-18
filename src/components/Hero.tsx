@@ -1,3 +1,5 @@
+import ScrollArrow from "./ScrollArrow"
+
 export default function HeroSection() {
     return(
         <section 
@@ -13,11 +15,7 @@ export default function HeroSection() {
                 </span>
             </h1>
 
-            <a
-                href="#about"
-                aria-label="Scroll down"
-                className="scroll-down-arrow"
-            />
+            <ScrollArrow />
         </section>
     )
 }
