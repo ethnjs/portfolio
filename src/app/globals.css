@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Citadel Script';
+  src: url('/fonts/CitadelScriptStd.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-[#121212] text-[#f0f0f0] select-none;
+}
+
+@layer components {
+  .scroll-down-arrow {
+    @apply absolute bottom-12 left-1/2 w-[3px] h-[22px] bg-white opacity-70 cursor-pointer transition-all duration-300 ease-out;
+    transform: translateX(-50%);
+    animation: subtle-float 2.5s infinite ease-in-out;
+  }
+
+  .scroll-down-arrow::after {
+    content: '';
+    @apply absolute left-1/2 bottom-0 w-[14px] h-[14px];
+    border-left: 3px solid #fff;
+    border-bottom: 3px solid #fff;
+    transform: translateX(-50%) rotate(-45deg);
+  }
+
+  .scroll-down-arrow:hover {
+    @apply opacity-100;
+  }
+
+  
+
+  /* Section Styling */
+  .section {
+      padding: 4rem 0;
+      border-bottom: 1px solid #222; /* Very subtle border for dark mode */
+  }
+
+  .section:last-child {
+      border-bottom: none;
+  }
+
+  /* Typography for content sections */
+  h2 {
+    @apply font-inter text-[2.5rem] font-bold text-white text-center mb-8
+  }
+
+  h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: #ccc;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .caption {
+    font-size: 0.8rem;
+    color: #666;
+    font-style: italic;
+    margin-top: 0.5rem;
+  }
+
+  /* Links */
+  a {
+    color: #ccc; /* A brighter blue for better contrast */
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  a:hover {
+    color: #ffffff;
+  }
+
+  /* Container to center the button */
+  .button-container {
+    text-align: center;
+    margin-top: 3rem; /* Space above the button */
+  }
+
+  /* Call-to-Action Button Styling */
+  .cta-button {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    background-color: transparent;
+    border: 2px solid #fff;
+    border-radius: 8px;
+    padding: 0.8rem 2rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .cta-button:hover {
+    background-color: #fff;
+    color: #000;
+  }
+}
+
+.scroll-down-arrow.fade-out {
+  opacity: 0;
+  transform: translate(-50%, 20px); /* Moves down while fading */
+  animation: none;
+  pointer-events: none; /* Prevents clicking when invisible */
+}
+
+@keyframes subtle-float {
+  0% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, 5px); }
+  100% { transform: translate(-50%, 0); }
+}
