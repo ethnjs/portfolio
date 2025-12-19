@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from '@vercel/analytics/next';
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -33,7 +34,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></link>
       </head>
-      <body className={`${inter.variable} ${citadel.variable} font-inter antialiased`}>{children}</body>
+      <body className={`${inter.variable} ${citadel.variable} font-inter antialiased`}>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
