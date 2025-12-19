@@ -134,7 +134,7 @@ export default function About() {
                     className="w-full text-left py-4 text-base text-[#ccc] hover:text-white transition-colors duration-300 relative pl-6"
                   >
                     <span 
-                      className={`absolute left-0 top-1/2 -translate-y-1/2 text-[1.2rem] text-[#666] transition-transform duration-500 ease-in-out ${openIndex === index ? 'rotate-45' : ''}`}
+                      className={`absolute left-0 top-1/2 -translate-y-1/2 text-[1.2rem] text-[#666] transition-transform duration-[400ms] ease-in-out ${openIndex === index ? 'rotate-45' : ''}`}
                     >
                       +
                     </span>
@@ -143,15 +143,15 @@ export default function About() {
                   
                   {/* DYNAMIC HEIGHT CONTAINER */}
                   <div 
-                    ref={(el) => (contentRefs.current[index] = el)}
+                    ref={(el) => {contentRefs.current[index] = el;}}
                     style={{ 
                         maxHeight: openIndex === index ? `${contentRefs.current[index]?.scrollHeight}px` : '0px' 
                     }}
-                    className="overflow-hidden transition-[max-height] duration-500 ease-out"
+                    className="overflow-hidden transition-[max-height] duration-[400ms] ease-out"
                   >
                     <ul className="pl-10 space-y-4">
                       {item.details.map((detail, i) => (
-                        <li key={i} className="pb-4 border-b border-dotted border-[#222] last:boarder-0 text-[#888] text-[0.95rem] leading-relaxed">
+                        <li key={i} className="pb-4 border-b border-dotted border-[#222] last:border-0 text-[#888] text-[0.95rem] leading-relaxed">
                           {detail}
                         </li>
                       ))}
