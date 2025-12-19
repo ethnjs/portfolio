@@ -40,16 +40,10 @@ export default function CourseworkTable() {
                 className="border-b border-dotted border-[#222] last:border-none hover:bg-[#1a1a1a] transition-colors duration-300"
               >
                 <td className="py-4 px-2 text-[#ccc]">{course.name}</td>
-                <td className="py-4 px-2 text-center font-bold text-white">
+                <td className={`py-4 px-2 text-center font-bold ${course.grade === "N/A" ? "text-[#777] italic" : "text-white"}`}>
                   {course.grade}
                 </td>
-                <td
-                  className={`py-4 px-2 text-center font-bold ${
-                    course.score === "N/A"
-                      ? "text-[#777] italic"
-                      : "text-white"
-                  }`}
-                >
+                <td className={`py-4 px-2 text-center font-bold ${course.score === "N/A" ? "text-[#777] italic" : "text-white"}`}>
                   {course.score}
                 </td>
               </tr>
