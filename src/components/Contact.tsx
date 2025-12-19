@@ -11,6 +11,12 @@ export default function ContactSection() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const contactIcons = [
+    { name: "LinkedIn", link: "https://www.linkedin.com/in/ethanshih1", icon: "fab fa-linkedin"},
+    { name: "GitHub", link: "https://github.com/ethnjs", icon: "fab fa-github"},
+    { name: "Resume", link: "/resume.pdf", icon: "far fa-file-lines"},
+  ]
+
   return (
     <section id="contact" className="py-16 max-w-[800px] mx-auto text-center">
       <h2 className="text-[2.5rem] font-bold text-white mb-8">
@@ -39,24 +45,19 @@ export default function ContactSection() {
            </button>
         </div>
 
-        {/* Social Icons */}
+        {/* Contact Icons */}
         <div className="flex justify-center gap-10 mt-2">
-          <a
-            href="https://www.linkedin.com/in/ethanshih1"
+          {contactIcons.map((contactIcon, i) => (
+            <a
+            key={i}
+            href={contactIcon.link}
             target="_blank"
             className="text-[2rem] text-[#ccc] transition-all duration-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
-            aria-label="LinkedIn"
-          >
-            <i className="fab fa-linkedin"></i>
-          </a>
-          <a
-            href="https://github.com/ethnjs"
-            target="_blank"
-            className="text-[2rem] text-[#ccc] transition-all duration-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
-            aria-label="GitHub"
-          >
-            <i className="fab fa-github"></i>
-          </a>
+            aria-label={contactIcon.name}
+            >
+              <i className={contactIcon.icon}></i>
+            </a>
+          ))}
         </div>
       </div>
     </section>
