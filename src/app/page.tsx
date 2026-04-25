@@ -1,15 +1,28 @@
+import { Suspense } from "react";
+import { hasAccess } from "@/lib/auth";
+import { projects } from "@/data/portfolio";
 import Hero from "@/components/Hero";
-import About from "@/components/About"
-import Tutoring from "@/components/Tutoring"
-import Contact from "@/components/Contact"
+import FloatingNav from "@/components/FloatingNav";
+import Projects from "@/components/Projects";
+import About from "@/components/About";
+import KeyValidator from "@/components/KeyValidator";
 
-export default function Home() {
+export default async function Home() {
+  const access = await hasAccess();
+
   return (
     <main>
+      <Suspense>
+        <KeyValidator />
+      </Suspense>
       <Hero />
-      <About />
-      <Tutoring />
-      <Contact />
+      <FloatingNav />
+      {access && (
+        <>
+          <Projects projects={projects} />
+          <About />
+        </>
+      )}
     </main>
   );
 }
