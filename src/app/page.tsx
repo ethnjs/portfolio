@@ -22,9 +22,9 @@ export default async function Home() {
         <>
           <Projects projects={projects} />
           <About />
+          <Footer />
         </>
       )}
-      <Footer />
     </main>
   );
 }
