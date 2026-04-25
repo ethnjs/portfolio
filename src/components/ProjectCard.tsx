@@ -24,17 +24,8 @@ export default function ProjectCard({ project }: { project: Project }) {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="group block rounded-[12px] overflow-hidden transition-all duration-300 hover:-translate-y-1"
-      style={{
-        background: "var(--surface)",
-        border: "1px solid var(--border)",
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = "var(--text-muted)";
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
-      }}
+      className="group block rounded-[12px] overflow-hidden transition-all duration-300 hover:-translate-y-1 card-border-hover"
+      style={{ background: "var(--surface)" }}
     >
       {/* Media area — 16/9 */}
       <div
