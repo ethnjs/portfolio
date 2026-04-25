@@ -7,11 +7,11 @@ export default function TutoringSection() {
   ];
 
   return (
-    <section id="tutoring" className="py-16 border-b border-[#222] max-w-[800px] mx-auto">
+    <section id="tutoring" className="py-16 border-b border-[var(--border-subtle)] max-w-[800px] mx-auto">
       <h2>
         private tutoring
       </h2>
-      <p className="text-center text-[1.1rem] text-[#ccc] mb-6">
+      <p className="text-center text-[1.1rem] text-[var(--text-secondary)] mb-6">
         one-on-one, in-person or virtual tutoring for the following subjects:
       </p>
 
@@ -20,7 +20,7 @@ export default function TutoringSection() {
         {subjects.map((sub, idx) => (
           <div
             key={idx}
-            className="bg-[#111] p-10 rounded-lg border border-[#333] text-center transition-all duration-300 hover:-translate-y-[5px] hover:border-[#666]"
+            className="bg-[var(--surface)] p-10 rounded-lg border border-[var(--border)] text-center transition-all duration-300 hover:-translate-y-[5px] hover:border-[var(--text-muted)]"
           >
             {/* Icon */}
             <div className="text-[2.5rem] text-white mb-6">
@@ -30,7 +30,7 @@ export default function TutoringSection() {
             <h3 className="text-[1.5rem] text-white mb-2 font-bold">
               {sub.subject}
             </h3>
-            <p className="text-[1.1rem] text-[#ccc] opacity-80">
+            <p className="text-[1.1rem] text-[var(--text-secondary)] opacity-80">
               {sub.level}
             </p>
           </div>

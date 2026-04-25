@@ -16,19 +16,19 @@ export default function CourseworkTable() {
 
   return (
     <div className="mt-8 pt-4">
-      <h4 className="font-bold text-[1.2rem] text-white border-b border-[#333] pb-2 mb-4">
+      <h4 className="font-bold text-[1.2rem] text-white border-b border-[var(--border)] pb-2 mb-4">
         notable coursework
       </h4>
       <table className="w-full border-collapse mt-6">
           <thead>
-            <tr className="border-b border-[#333]">
-              <th className="text-[#888] font-bold text-[0.8rem] pb-4 uppercase text-left w-[60%]">
+            <tr className="border-b border-[var(--border)]">
+              <th className="text-[var(--text-muted)] font-bold text-[0.8rem] pb-4 uppercase text-left w-[60%]">
                 Course
               </th>
-              <th className="text-[#888] font-bold text-[0.8rem] pb-4 uppercase text-center">
+              <th className="text-[var(--text-muted)] font-bold text-[0.8rem] pb-4 uppercase text-center">
                 Grade
               </th>
-              <th className="text-[#888] font-bold text-[0.8rem] pb-4 uppercase text-center">
+              <th className="text-[var(--text-muted)] font-bold text-[0.8rem] pb-4 uppercase text-center">
                 AP Score
               </th>
             </tr>
@@ -37,13 +37,13 @@ export default function CourseworkTable() {
             {courses.map((course, idx) => (
               <tr
                 key={idx}
-                className="border-b border-dotted border-[#222] last:border-none hover:bg-[#1a1a1a] transition-colors duration-300"
+                className="border-b border-dotted border-[var(--border-subtle)] last:border-none hover:bg-[var(--surface)] transition-colors duration-300"
               >
-                <td className="py-4 px-2 text-[#ccc]">{course.name}</td>
-                <td className={`py-4 px-2 text-center font-bold ${course.grade === "N/A" ? "text-[#777] italic" : "text-white"}`}>
+                <td className="py-4 px-2 text-[var(--text-secondary)]">{course.name}</td>
+                <td className={`py-4 px-2 text-center font-bold ${course.grade === "N/A" ? "text-[var(--text-muted)] italic" : "text-white"}`}>
                   {course.grade}
                 </td>
-                <td className={`py-4 px-2 text-center font-bold ${course.score === "N/A" ? "text-[#777] italic" : "text-white"}`}>
+                <td className={`py-4 px-2 text-center font-bold ${course.score === "N/A" ? "text-[var(--text-muted)] italic" : "text-white"}`}>
                   {course.score}
                 </td>
               </tr>

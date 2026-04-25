@@ -76,7 +76,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className="py-16 border-b border-[#222] max-w-[800px] mx-auto">
+    <section id="about" className="py-16 border-b border-[var(--border-subtle)] max-w-[800px] mx-auto">
       {/* Main Header */}
       <h2>
         about me
@@ -104,10 +104,10 @@ export default function About() {
           
           {/* 1. GPA Item */}
           <div className="min-[800px]:col-span-1">
-            <h4 className="font-bold text-[1.2rem] text-white border-b border-[#333] pb-2 mb-4">
+            <h4 className="font-bold text-[1.2rem] text-white border-b border-[var(--border)] pb-2 mb-4">
               academic gpa
             </h4>
-            <p className="text-[0.9rem] font-medium text-[#888] -mt-1 mb-4">
+            <p className="text-[0.9rem] font-medium text-[var(--text-muted)] -mt-1 mb-4">
               glen a wilson high school
             </p>
             <p className="text-[2.5rem] font-bold text-white leading-[1.2]">
@@ -115,26 +115,26 @@ export default function About() {
               <span ref={gpaRef}>0.00</span> 
               <span className="text-2xl"> / 4.0</span>
             </p>
-            <p className="text-[0.8rem] text-[#666] italic mt-2">
+            <p className="text-[0.8rem] text-[var(--text-muted)] italic mt-2">
               (not including band or pe)
             </p>
           </div>
 
           {/* 2. Experience Accordion */}
           <div className="min-[800px]:col-span-2">
-            <h4 className="font-bold text-[1.2rem] text-white border-b border-[#333] pb-2 mb-2">
+            <h4 className="font-bold text-[1.2rem] text-white border-b border-[var(--border)] pb-2 mb-2">
               experience
             </h4>
             <div className="w-full">
               {experienceData.map((item, index) => (
-                <div key={index} className="border-b border-dotted border-[#222] last:border-0">
+                <div key={index} className="border-b border-dotted border-[var(--border-subtle)] last:border-0">
                   <button
                     onClick={() => toggleAccordion(index)}
                     aria-expanded={openIndex === index}
-                    className="w-full text-left py-4 text-base text-[#ccc] hover:text-white transition-colors duration-300 relative pl-6"
+                    className="w-full text-left py-4 text-base text-[var(--text-secondary)] hover:text-white transition-colors duration-300 relative pl-6"
                   >
                     <span 
-                      className={`absolute left-0 top-1/2 -translate-y-1/2 text-[1.2rem] text-[#666] transition-transform duration-[400ms] ease-in-out ${openIndex === index ? 'rotate-45' : ''}`}
+                      className={`absolute left-0 top-1/2 -translate-y-1/2 text-[1.2rem] text-[var(--text-muted)] transition-transform duration-[400ms] ease-in-out ${openIndex === index ? 'rotate-45' : ''}`}
                     >
                       +
                     </span>
@@ -151,7 +151,7 @@ export default function About() {
                   >
                     <ul className="pl-10 space-y-4">
                       {item.details.map((detail, i) => (
-                        <li key={i} className="pb-4 border-b border-dotted border-[#222] last:border-0 text-[#888] text-[0.95rem] leading-relaxed">
+                        <li key={i} className="pb-4 border-b border-dotted border-[var(--border-subtle)] last:border-0 text-[var(--text-muted)] text-[0.95rem] leading-relaxed">
                           {detail}
                         </li>
                       ))}

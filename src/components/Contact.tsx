@@ -22,7 +22,7 @@ export default function ContactSection() {
       <h2 className="text-[2.5rem] font-bold text-white mb-8">
         contact
       </h2>
-      <p className="text-[1.1rem] text-[#ccc] mb-8">
+      <p className="text-[1.1rem] text-[var(--text-secondary)] mb-8">
         if you have any questions, feel free to reach out
       </p>
 
@@ -38,7 +38,7 @@ export default function ContactSection() {
 
            <button
              onClick={handleCopy}
-             className="text-[1.2rem] font-bold text-[#ccc] hover:text-white transition-colors cursor-pointer"
+             className="text-[1.2rem] font-bold text-[var(--text-secondary)] hover:text-white transition-colors cursor-pointer"
              title="copy to clipboard"
            >
              {email}
@@ -52,7 +52,7 @@ export default function ContactSection() {
             key={i}
             href={contactIcon.link}
             target="_blank"
-            className="text-[2rem] text-[#ccc] transition-all duration-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
+            className="text-[2rem] text-[var(--text-secondary)] transition-all duration-300 hover:text-white hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]"
             aria-label={contactIcon.name}
             >
               <i className={contactIcon.icon}></i>
