@@ -14,10 +14,15 @@ const TRACKED = ["projects", "about", "skills"];
 export default function FloatingNav() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [hovered, setHovered] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      const center = window.scrollY + window.innerHeight / 2;
+      const hero = window.innerHeight;
+      const pastHero = window.scrollY > hero * 0.7;
+      setVisible(pastHero);
+
+      const center = window.scrollY + hero / 2;
       let closest: string | null = null;
       let minDist = Infinity;
 
@@ -31,9 +36,7 @@ export default function FloatingNav() {
         }
       }
 
-      // Only mark active once we've scrolled past the hero
-      const heroHeight = window.innerHeight;
-      setActiveSection(window.scrollY > heroHeight * 0.5 ? closest : null);
+      setActiveSection(pastHero ? closest : null);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -46,7 +49,7 @@ export default function FloatingNav() {
   };
 
   return (
-    <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50">
+    <nav className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-out ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3 pointer-events-none"}`}>
       <div
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}

@@ -15,8 +15,8 @@ export default async function Home() {
       <Suspense>
         <KeyValidator />
       </Suspense>
-      <Hero />
-      <FloatingNav />
+      <Hero access={access} />
+      {access && <FloatingNav />}
       {access && (
         <>
           <Projects projects={projects} />
