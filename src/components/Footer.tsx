@@ -13,7 +13,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="w-full mt-16 py-8 px-8"
+      className="w-full mt-16 pt-8 pb-24 px-8"
       style={{ borderTop: "1px solid var(--border-subtle)" }}
     >
       <div className="max-w-[800px] mx-auto flex flex-col gap-5">
