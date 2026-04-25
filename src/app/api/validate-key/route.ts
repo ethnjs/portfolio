@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createDecipheriv, createHash } from "crypto";
+import { encryptAccessToken } from "@/lib/auth";
 
 type KeyEntry = { key: string; expires: string };
 
@@ -31,7 +32,7 @@ export async function POST(req: NextRequest) {
     if (match.expires < today) return NextResponse.json({ valid: false }, { status: 401 });
 
     const res = NextResponse.json({ valid: true });
-    res.cookies.set("portfolio_access", "1", {
+    res.cookies.set("portfolio_access", encryptAccessToken(), {
       httpOnly: true,
       maxAge: 3600,
       path: "/",
