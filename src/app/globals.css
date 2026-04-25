@@ -62,7 +62,7 @@ body {
 
   /* Typography for content sections */
   h2 {
-    @apply font-inter text-[2.5rem] font-bold text-white text-center mb-8
+    @apply font-inter text-[2.5rem] font-bold text-white text-left mb-8
   }
 
   h3 {

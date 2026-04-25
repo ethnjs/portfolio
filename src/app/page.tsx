@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import FloatingNav from "@/components/FloatingNav";
 import Projects from "@/components/Projects";
 import About from "@/components/About";
+import Footer from "@/components/Footer";
 import KeyValidator from "@/components/KeyValidator";
 
 export default async function Home() {
@@ -23,6 +24,7 @@ export default async function Home() {
           <About />
         </>
       )}
+      <Footer />
     </main>
   );
 }
