@@ -31,7 +31,7 @@ export default function Footer() {
             </div>
             <button
               onClick={handleCopy}
-              className="text-xs text-[var(--text-muted)] hover:text-white transition-colors cursor-pointer tracking-wide"
+              className="neon-glow-hover text-xs cursor-pointer tracking-wide"
               title="copy to clipboard"
             >
               {hero.email}
@@ -46,7 +46,7 @@ export default function Footer() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-base text-[var(--text-muted)] hover:text-white transition-colors duration-200"
+                className="neon-glow-hover text-base"
                 aria-label={link.label}
               >
                 <i className={link.icon}></i>

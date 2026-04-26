@@ -53,7 +53,7 @@ export default function HeroSection({ access }: { access: boolean }) {
           </div>
           <button
             onClick={handleCopy}
-            className="text-[0.85rem] font-medium text-[var(--text-secondary)] hover:text-white transition-colors cursor-pointer tracking-wide"
+            className="neon-glow-hover text-[0.85rem] font-medium cursor-pointer tracking-wide"
             title="copy to clipboard"
           >
             {hero.email}
