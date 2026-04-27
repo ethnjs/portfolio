@@ -1,7 +1,7 @@
 export const meta = {
   title: "NEXUS",
-  tagline: "PLACEHOLDER: one-line description of what it does and who it's for",
-  tags: ["Next.js", "FastAPI", "PostgreSQL", "Google Sheets API"],
+  tagline: "A full-stack volunteer management dashboard for Science Olympiad tournament directors.",
+  tags: ["Typscript", "Next.js", "Python", "FastAPI", "PostgreSQL", "SQLite3", "SQLAlchemy", "Google API", "JWT Auth", "Railway", "Vercel"],
   gif: "/videos/nexus-login-new-tournament.mp4",
   status: "Active — In Development",
   links: [
@@ -12,9 +12,16 @@ export const meta = {
 
 ## the problem
 
-PLACEHOLDER: Science Olympiad tournament directors manage dozens of volunteers across a full-day
-competition — assigning them to events, tracking availability, and handling last-minute changes.
-Before NEXUS, this was spreadsheets and manual emails. NEXUS centralizes the entire workflow.
+Running a Science Olympiad tournament means coordinating dozens of volunteers across events, 
+time slots, and shifting availability. Most tournament directors still manage all of this through 
+a patchwork of Google Forms, spreadsheets, and email chains — there's no dedicated tool for it.
+
+<ProjectImage src="images/nexus-sync-pipeline.png" caption="image" />
+
+NEXUS is the platform I'm building to replace that entire workflow, from volunteer intake 
+through day-of logistics. It's designed to scale to hundreds of tournaments and thousands of 
+users: tournament directors, event supervisors, and volunteers all in one place.
+
 
 <VideoEmbed src="/videos/nexus-sheets-pipeline.mp4" caption="Google Sheets sync — mapping volunteer data into NEXUS" />
 

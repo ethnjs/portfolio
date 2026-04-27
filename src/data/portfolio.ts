@@ -17,10 +17,11 @@ export const about = {
     "PLACEHOLDER: What you're currently learning or building.",
   ],
   skills: [
-    { category: "Languages",   items: ["PLACEHOLDER", "Python", "TypeScript"] },
-    { category: "Frameworks",  items: ["PLACEHOLDER", "Next.js", "FastAPI"]   },
-    { category: "Tools",       items: ["PLACEHOLDER", "Git", "Docker"]        },
-    { category: "Hardware",    items: ["PLACEHOLDER", "ESP32", "Arduino"]     },
+    { category: "Languages",   items: ["Python", "SQL", "C++", "Java", "Typescript", "Javascript", "HTML/CSS"] },
+    { category: "Frameworks",  items: ["FastAPI", "Next.js", "React", "Tailwind CSS", "Node.js"] },
+    { category: "Libraries",   items: ["SQLite3", "SQLAlchemy"]},
+    { category: "Tools",       items: ["Git", "Github", "VS Code", "PyCharm", "PostgreSQL", "Arduino IDE"] },
+    { category: "Hardware",    items: ["ESP32", "Arduino", "KiCad", "Vivado"] },
   ],
 }
 
