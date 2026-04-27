@@ -161,3 +161,8 @@ body {
   50% { transform: translate(-50%, 5px); }
   100% { transform: translate(-50%, 0); }
 }
+
+/* MDX body — first child has no extra top margin */
+.mdx-body > *:first-child {
+  margin-top: 0;
+}
