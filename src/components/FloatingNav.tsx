@@ -26,18 +26,14 @@ export default function FloatingNav() {
       const pastHero = window.scrollY > heroH * 0.7;
       setVisible(pastHero);
 
-      const center = window.scrollY + heroH / 2;
-      let closest: string | null = null;
-      let minDist = Infinity;
-
+      let active: string | null = null;
       for (const id of TRACKED) {
         const el = document.getElementById(id);
         if (!el) continue;
-        const dist = Math.abs(el.offsetTop - center);
-        if (dist < minDist) { minDist = dist; closest = id; }
+        if (el.getBoundingClientRect().top <= 0) active = id;
       }
 
-      setActiveSection(pastHero ? closest : null);
+      setActiveSection(pastHero ? active : null);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
