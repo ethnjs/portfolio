@@ -38,7 +38,7 @@ export const projects: Project[] = [
     slug: "nexus",
     title: "NEXUS",
     tagline: "PLACEHOLDER: one-line description of what it does and who it's for",
-    gif: "/videos/nexus-card.mp4",
+    gif: "/videos/nexus-login-new-tournament.mp4",
     cardImage: null,
     tags: ["Next.js", "FastAPI", "PostgreSQL", "Google Sheets API"],
   },
