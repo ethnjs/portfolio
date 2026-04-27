@@ -60,31 +60,28 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       />
     ),
     table: (props) => (
-      <div className="my-6 overflow-x-auto">
-        <table
-          className="w-full border-collapse text-sm"
-          style={{ border: "1px solid var(--border)" }}
-          {...props}
-        />
+      <div
+        className="my-6 rounded-[8px] overflow-hidden"
+        style={{ border: "1px solid var(--border)", background: "var(--surface)" }}
+      >
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-sm m-0" {...props} />
+        </div>
       </div>
     ),
-    thead: (props) => (
-      <thead style={{ background: "var(--bg-secondary)" }} {...props} />
-    ),
+    thead: (props) => <thead {...props} />,
     tr: (props) => (
       <tr style={{ borderTop: "1px solid var(--border-subtle)" }} {...props} />
     ),
     th: (props) => (
       <th
-        className="font-inter font-semibold text-white text-left px-3 py-2"
-        style={{ borderRight: "1px solid var(--border-subtle)" }}
+        className="font-mono text-xs uppercase tracking-widest text-[var(--text-muted)] text-left px-4 py-3 font-normal"
         {...props}
       />
     ),
     td: (props) => (
       <td
-        className="text-[var(--text-secondary)] px-3 py-2 align-top"
-        style={{ borderRight: "1px solid var(--border-subtle)" }}
+        className="text-[var(--text-secondary)] leading-relaxed px-4 py-3 align-top"
         {...props}
       />
     ),

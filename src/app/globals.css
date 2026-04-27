@@ -166,3 +166,14 @@ body {
 .mdx-body > *:first-child {
   margin-top: 0;
 }
+
+/* MDX tables — suppress separator above the very first row */
+.mdx-body table tr:first-child {
+  border-top: 0;
+}
+
+/* MDX tables — vertical column separators (skip last column) */
+.mdx-body table th:not(:last-child),
+.mdx-body table td:not(:last-child) {
+  border-right: 1px solid var(--border-subtle);
+}
