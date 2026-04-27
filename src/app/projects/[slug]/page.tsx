@@ -3,65 +3,16 @@ import Link from "next/link";
 import { hasAccess } from "@/lib/auth";
 import { projects } from "@/data/portfolio";
 import ProjectLinks from "@/components/mdx/ProjectLinks";
-import ProjectImage from "@/components/mdx/ProjectImage";
-import CodeSnippet from "@/components/mdx/CodeSnippet";
-import VideoEmbed from "@/components/mdx/VideoEmbed";
 import type { ProjectMeta } from "@/types/project";
-
-const mdxComponents = {
-  ProjectImage,
-  CodeSnippet,
-  VideoEmbed,
-  h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h3
-      className="font-inter font-bold text-white text-lg text-left mb-3 mt-10"
-      {...props}
-    />
-  ),
-  h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h3
-      className="font-inter font-bold text-white text-base text-left mb-2 mt-8"
-      {...props}
-    />
-  ),
-  p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
-    <p
-      className="text-[var(--text-secondary)] leading-relaxed mb-4"
-      {...props}
-    />
-  ),
-  ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
-    <ul className="flex flex-col gap-2 pl-5 mb-6" {...props} />
-  ),
-  li: (props: React.HTMLAttributes<HTMLLIElement>) => (
-    <li
-      className="text-[var(--text-secondary)] leading-relaxed list-disc"
-      {...props}
-    />
-  ),
-  strong: (props: React.HTMLAttributes<HTMLElement>) => (
-    <strong className="text-white font-semibold" {...props} />
-  ),
-  a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
-    <a
-      className="text-white underline underline-offset-2 hover:opacity-80 transition-opacity"
-      target="_blank"
-      rel="noopener noreferrer"
-      {...props}
-    />
-  ),
-  hr: () => (
-    <hr className="my-8 border-none" style={{ borderTop: "1px solid var(--border-subtle)" }} />
-  ),
-  blockquote: (props: React.HTMLAttributes<HTMLElement>) => (
-    <blockquote
-      className="border-l-2 border-[var(--border)] pl-4 my-6 text-[var(--text-muted)] italic font-mono text-sm"
-      {...props}
-    />
-  ),
-};
+import type { ComponentType } from "react";
 
 type PageProps = { params: Promise<{ slug: string }> };
+
+const mdxModules = {
+  nexus:              () => import("@/content/projects/nexus.mdx"),
+  columns:            () => import("@/content/projects/columns.mdx"),
+  "embedded-systems": () => import("@/content/projects/embedded-systems.mdx"),
+};
 
 export default async function ProjectPage({ params }: PageProps) {
   const access = await hasAccess();
@@ -72,13 +23,16 @@ export default async function ProjectPage({ params }: PageProps) {
   const card = projects.find((p) => p.slug === slug);
   if (!card) notFound();
 
-  let MDXContent: React.ComponentType<{ components?: typeof mdxComponents }>;
+  if (!(slug in mdxModules)) notFound();
+
+  let MDXContent: ComponentType;
   let meta: ProjectMeta;
   try {
-    const mod = await import(`@/content/projects/${slug}.mdx`);
-    MDXContent = mod.default;
-    meta = mod.meta ?? {};
-  } catch {
+    const mod = await mdxModules[slug as keyof typeof mdxModules]();
+    MDXContent = mod.default as ComponentType;
+    meta = (mod.meta as ProjectMeta) ?? {};
+  } catch (e) {
+    console.error(`[project page] failed to load MDX for slug "${slug}":`, e);
     notFound();
   }
 
@@ -134,7 +88,7 @@ export default async function ProjectPage({ params }: PageProps) {
         </div>
 
         <div className="mdx-body">
-          <MDXContent components={mdxComponents} />
+          <MDXContent />
         </div>
 
         {meta.links && meta.links.length > 0 && (
