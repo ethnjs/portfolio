@@ -1,16 +1,16 @@
 import type { ProjectLink } from "@/types/project";
 
 const ICON_MAP: Record<string, string> = {
-  demo:    "fa-solid fa-globe",
+  website:    "fa-solid fa-globe",
   github:  "fab fa-github",
-  video:   "fa-solid fa-circle-play",
+  demo:   "fa-solid fa-circle-play",
   writeup: "fa-solid fa-file-lines",
 };
 
 const LABEL_MAP: Record<string, string> = {
-  demo:    "live demo",
+  website:    "website",
   github:  "github",
-  video:   "demo video",
+  demo:   "demo video",
   writeup: "write-up",
 };
 

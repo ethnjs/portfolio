@@ -1,4 +1,4 @@
-export type ProjectLinkType = "demo" | "github" | "video" | "writeup";
+export type ProjectLinkType = "website" | "github" | "demo" | "writeup";
 
 export type ProjectLink = {
   type: ProjectLinkType;
