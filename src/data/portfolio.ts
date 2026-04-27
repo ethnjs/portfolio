@@ -36,7 +36,7 @@ export type Project = {
   role: string
   techDecisions: string[]
   challenges: string[]
-  results: string[]
+  results?: string[]
   whatsNext?: string[]
   demoUrl?: string
   repoUrl?: string
@@ -66,21 +66,18 @@ export const projects: Project[] = [
       "PLACEHOLDER: A concrete technical challenge you faced.",
       "PLACEHOLDER: Another challenge and how you solved it.",
     ],
-    results: [
-      "PLACEHOLDER: Real users / usage metrics.",
-      "PLACEHOLDER: Any measurable impact.",
-    ],
+    results: null,
     whatsNext: [
       "PLACEHOLDER: Upcoming feature or technical goal.",
     ],
     demoUrl: "https://nexus.ethanshih.com",
-    repoUrl: undefined,
+    repoUrl: "https://github.com/ethnjs/nexus",
   },
   {
     slug: "columns",
     title: "Columns",
     tagline: "A Sega Columns-inspired puzzle game — extended beyond the assignment with scoring and a persistent leaderboard",
-    status: "Completed — Class Project",
+    status: "Completed",
     gif: null,
     cardImage: null,
     tags: ["Python", "Pygame", "JSON"],
@@ -109,7 +106,7 @@ export const projects: Project[] = [
     slug: "embedded-systems",
     title: "Embedded Systems Series",
     tagline: "5 hardware projects spanning analog circuits to wireless IoT — built with OPS / IEEE @ UCI",
-    status: "Completed — OPS / IEEE @ UCI",
+    status: "Completed",
     gif: null,
     cardImage: null,
     tags: ["ESP32", "Arduino", "I2C", "UART", "C++"],
