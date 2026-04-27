@@ -42,4 +42,4 @@ yarn-error.log*
 next-env.d.ts
 
 # misc
-CLAUDE_CODE_HANDOFF.md
+CLAUDE_CODE*.md
