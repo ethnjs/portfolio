@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Project } from "@/data/portfolio";
+import type { ProjectData } from "@/lib/projects";
 import VideoEmbed from "@/components/VideoEmbed";
 
 function initials(title: string): string {
@@ -8,7 +8,7 @@ function initials(title: string): string {
   return words.slice(0, 2).map((w) => w[0]).join("").toUpperCase();
 }
 
-export default function ProjectCard({ project }: { project: Project }) {
+export default function ProjectCard({ project }: { project: ProjectData }) {
   return (
     <Link
       href={`/projects/${project.slug}`}

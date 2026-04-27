@@ -1,36 +1,27 @@
 import { redirect, notFound } from "next/navigation";
 import Link from "next/link";
 import { hasAccess } from "@/lib/auth";
-import { projects } from "@/data/portfolio";
+import { projectModules } from "@/lib/projects";
 import ProjectLinks from "@/components/mdx/ProjectLinks";
 import type { ProjectMeta } from "@/types/project";
+import type { ProjectSlug } from "@/lib/projects";
 import type { ComponentType } from "react";
 
 type PageProps = { params: Promise<{ slug: string }> };
-
-const mdxModules = {
-  nexus:              () => import("@/content/projects/nexus.mdx"),
-  columns:            () => import("@/content/projects/columns.mdx"),
-  "embedded-systems": () => import("@/content/projects/embedded-systems.mdx"),
-};
 
 export default async function ProjectPage({ params }: PageProps) {
   const access = await hasAccess();
   if (!access) redirect("/");
 
   const { slug } = await params;
+  if (!(slug in projectModules)) notFound();
 
-  const card = projects.find((p) => p.slug === slug);
-  if (!card) notFound();
-
-  if (!(slug in mdxModules)) notFound();
-
-  let MDXContent: ComponentType;
+  let Content: ComponentType;
   let meta: ProjectMeta;
   try {
-    const mod = await mdxModules[slug as keyof typeof mdxModules]();
-    MDXContent = mod.default as ComponentType;
-    meta = (mod.meta as ProjectMeta) ?? {};
+    const mod = await projectModules[slug as ProjectSlug]();
+    Content = mod.default as ComponentType;
+    meta = mod.meta as ProjectMeta;
   } catch (e) {
     console.error(`[project page] failed to load MDX for slug "${slug}":`, e);
     notFound();
@@ -49,10 +40,10 @@ export default async function ProjectPage({ params }: PageProps) {
 
         <div className="mb-10">
           <h1 className="font-inter font-bold text-white text-[2.5rem] leading-tight mb-3">
-            {card.title}
+            {meta.title}
           </h1>
           <p className="text-[var(--text-secondary)] text-base leading-relaxed mb-4 m-0">
-            {card.tagline}
+            {meta.tagline}
           </p>
 
           {meta.status && (
@@ -72,7 +63,7 @@ export default async function ProjectPage({ params }: PageProps) {
           )}
 
           <div className="flex flex-wrap gap-2">
-            {card.tags.map((tag) => (
+            {meta.tags.map((tag) => (
               <span
                 key={tag}
                 className="font-mono text-xs px-2 py-0.5 rounded-[6px] text-[var(--text-muted)]"
@@ -88,7 +79,7 @@ export default async function ProjectPage({ params }: PageProps) {
         </div>
 
         <div className="mdx-body">
-          <MDXContent />
+          <Content />
         </div>
 
         {meta.links && meta.links.length > 0 && (

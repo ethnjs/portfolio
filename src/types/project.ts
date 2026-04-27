@@ -7,6 +7,11 @@ export type ProjectLink = {
 };
 
 export type ProjectMeta = {
+  title: string;
+  tagline: string;
+  tags: string[];
+  gif?: string;
+  cardImage?: string;
   status: string;
   links?: ProjectLink[];
 };

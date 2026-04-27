@@ -24,38 +24,3 @@ export const about = {
   ],
 }
 
-export type Project = {
-  slug: string
-  title: string
-  tagline: string
-  tags: string[]
-  gif: string | null
-  cardImage: string | null
-}
-
-export const projects: Project[] = [
-  {
-    slug: "nexus",
-    title: "NEXUS",
-    tagline: "PLACEHOLDER: one-line description of what it does and who it's for",
-    gif: "/videos/nexus-login-new-tournament.mp4",
-    cardImage: null,
-    tags: ["Next.js", "FastAPI", "PostgreSQL", "Google Sheets API"],
-  },
-  {
-    slug: "columns",
-    title: "Columns",
-    tagline: "A Sega Columns-inspired puzzle game — extended beyond the assignment with scoring and a persistent leaderboard",
-    gif: null,
-    cardImage: null,
-    tags: ["Python", "Pygame", "JSON"],
-  },
-  {
-    slug: "embedded-systems",
-    title: "Embedded Systems Series",
-    tagline: "5 hardware projects spanning analog circuits to wireless IoT — built with OPS / IEEE @ UCI",
-    gif: null,
-    cardImage: null,
-    tags: ["ESP32", "Arduino", "I2C", "UART", "C++"],
-  },
-]
