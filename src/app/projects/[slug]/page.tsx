@@ -76,15 +76,15 @@ export default async function ProjectPage({ params }: PageProps) {
               </span>
             ))}
           </div>
+
+          {meta.links && meta.links.length > 0 && (
+            <ProjectLinks links={meta.links} />
+          )}
         </div>
 
         <div className="mdx-body">
           <Content />
         </div>
-
-        {meta.links && meta.links.length > 0 && (
-          <ProjectLinks links={meta.links} />
-        )}
 
       </div>
     </main>
