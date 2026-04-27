@@ -1,0 +1,65 @@
+export const meta = {
+  title: "NEXUS",
+  tagline: "A full-stack volunteer management dashboard for Science Olympiad tournament directors.",
+  tags: ["Typscript", "Next.js", "Python", "FastAPI", "PostgreSQL", "SQLite3", "SQLAlchemy", "Google API", "JWT Auth", "Railway", "Vercel"],
+  gif: "/videos/nexus-login-new-tournament.mp4",
+  status: "Active — In Development",
+  links: [
+    { type: "website", url: "https://nexus.ethanshih.com" },
+    { type: "github", url: "https://github.com/ethnjs/nexus" },
+  ],
+}
+
+## the problem
+
+Running a Science Olympiad tournament means coordinating dozens of volunteers across events, 
+time slots, and shifting availability. Most tournament directors still manage all of this through 
+a patchwork of Google Forms, spreadsheets, and email chains — there's no dedicated tool for it.
+
+<ProjectImage
+  src="/images/nexus-sync-pipeline.png"
+  caption="Sync diagram: data is imported from the Google APIs, then is processed via the sheet
+   configuration before finally saving in the PostgreSQL database"
+  padding={true}
+/>
+
+NEXUS is the platform I'm building to replace that entire workflow, from volunteer intake 
+through day-of logistics. It's designed to scale to hundreds of tournaments and thousands of 
+users: tournament directors, event supervisors, and volunteers all in one place.
+
+## features
+The core of NEXUS right now is the volunteer sync pipeline. A tournament director connects 
+their Google Form, which they're already sending out to volunteers, and the Google Sheet that 
+populates with the data from the form's responses.
+
+<VideoEmbed src="/videos/nexus-sheets-pipeline.mp4" caption="Google Sheets sync — setting up the sheets pipeline" />
+
+
+
+<VideoEmbed src="/videos/nexus-sheets-mapping.mp4" caption="Google Sheets sync — configuring the mapping from sheet column to data field" />
+
+and NEXUS pulls the responses directly from Google Sheets into the system. Volunteer names, emails, availability, and event preferences all sync automatically, no manual data entry required.
+
+## my role
+
+PLACEHOLDER: I'm the sole developer — responsible for the full stack, from database schema to
+drag-and-drop UI. I also designed the data model and own all deployment infrastructure on
+Railway and Vercel.
+
+## technical decisions
+
+- **FastAPI over Django** — PLACEHOLDER: your reason here.
+- **SQLite in dev, PostgreSQL in prod** — same SQLAlchemy models, zero code changes between
+  environments. Keeps local iteration fast with no Docker dependency.
+- **Google Sheets as the intake layer** — tournament directors already collect volunteer interest
+  via Google Forms. Rather than rebuilding intake, NEXUS syncs directly from the sheet so
+  directors don't change their workflow.
+
+## challenges
+
+- PLACEHOLDER: A concrete technical challenge and how you solved it.
+- PLACEHOLDER: Another challenge.
+
+## what's next
+
+- PLACEHOLDER: Upcoming feature or technical goal.

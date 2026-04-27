@@ -12,6 +12,7 @@ const config: Config = {
       fontFamily: {
         inter: ["var(--font-inter)", ...defaultTheme.fontFamily.sans],
         citadel: ["var(--font-citadel)"],
+        mono: ["var(--font-geist-mono)", ...defaultTheme.fontFamily.mono],
       },
     },
   },

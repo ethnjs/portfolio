@@ -3,38 +3,34 @@ import { useEffect, useState } from "react";
 
 export default function ScrollArrow() {
   const [isVisible, setIsVisible] = useState(true);
+  const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
-    const toggleVisibility = () => {
-      // If user scrolls down more than 100px, hide the arrow
-      if (window.scrollY > 100) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-    };
-
-    // Add scroll listener
-    window.addEventListener("scroll", toggleVisibility);
-
-    // Clean up listener when component unmounts
-    return () => window.removeEventListener("scroll", toggleVisibility);
+    const handleScroll = () => setIsVisible(window.scrollY <= 100);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleScrollDown = () => {
-    // Finds the 'about' section and scrolls to it
-    const aboutSection = document.getElementById("about");
-    if (aboutSection) {
-      aboutSection.scrollIntoView({ behavior: "smooth" });
-    }
+    document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <div
-      // Conditionally add the 'fade-out' class string
-      className={`scroll-down-arrow ${isVisible ? "" : "fade-out"}`}
+    <button
       onClick={handleScrollDown}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       aria-label="Scroll down"
-    ></div>
+      className={`absolute bottom-10 left-1/2 -translate-x-1/2 cursor-pointer transition-all duration-300 ease-out ${
+        isVisible ? "translate-y-0 opacity-100" : "opacity-0 translate-y-5 pointer-events-none"
+      }`}
+      style={{
+        animation: isVisible ? "subtle-float 2.5s infinite ease-in-out" : "none",
+        color: hovered ? "#ffffff" : "var(--text-muted)",
+        filter: hovered ? "drop-shadow(0 0 8px rgba(255,255,255,0.9)) drop-shadow(0 0 20px rgba(255,255,255,0.5))" : "none",
+      }}
+    >
+      <i className="fa-solid fa-arrow-down text-2xl"></i>
+    </button>
   );
 }
