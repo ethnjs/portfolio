@@ -1,23 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Project } from "@/data/portfolio";
+import VideoEmbed from "@/components/VideoEmbed";
 
 function initials(title: string): string {
   const words = title.trim().split(/\s+/);
   return words.slice(0, 2).map((w) => w[0]).join("").toUpperCase();
-}
-
-function statusDot(status: string) {
-  const isActive = status.toLowerCase().startsWith("active");
-  return (
-    <span className="flex items-center gap-1.5">
-      <span
-        className="inline-block w-1.5 h-1.5 rounded-full"
-        style={{ background: isActive ? "#4ade80" : "var(--text-muted)" }}
-      />
-      <span className="font-mono text-xs text-[var(--text-muted)]">{status}</span>
-    </span>
-  );
 }
 
 export default function ProjectCard({ project }: { project: Project }) {
@@ -32,7 +20,9 @@ export default function ProjectCard({ project }: { project: Project }) {
         className="w-full flex items-center justify-center overflow-hidden"
         style={{ aspectRatio: "16/9", background: "var(--bg-secondary)" }}
       >
-        {project.gif ? (
+        {project.gif?.endsWith(".mp4") ? (
+          <VideoEmbed src={project.gif} />
+        ) : project.gif ? (
           <img
             src={project.gif}
             alt={project.title}
@@ -58,15 +48,12 @@ export default function ProjectCard({ project }: { project: Project }) {
 
       {/* Content */}
       <div className="p-5 flex flex-col gap-3">
-        <div className="flex items-start justify-between gap-3">
-          <h3
-            className="font-inter font-bold text-white text-left m-0"
-            style={{ fontSize: "1.1rem" }}
-          >
-            {project.title}
-          </h3>
-          {statusDot(project.status)}
-        </div>
+        <h3
+          className="font-inter font-bold text-white text-left m-0"
+          style={{ fontSize: "1.1rem" }}
+        >
+          {project.title}
+        </h3>
 
         <p
           className="font-inter text-sm text-[var(--text-secondary)] leading-relaxed m-0"
