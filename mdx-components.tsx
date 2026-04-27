@@ -59,5 +59,34 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {...props}
       />
     ),
+    table: (props) => (
+      <div className="my-6 overflow-x-auto">
+        <table
+          className="w-full border-collapse text-sm"
+          style={{ border: "1px solid var(--border)" }}
+          {...props}
+        />
+      </div>
+    ),
+    thead: (props) => (
+      <thead style={{ background: "var(--bg-secondary)" }} {...props} />
+    ),
+    tr: (props) => (
+      <tr style={{ borderTop: "1px solid var(--border-subtle)" }} {...props} />
+    ),
+    th: (props) => (
+      <th
+        className="font-inter font-semibold text-white text-left px-3 py-2"
+        style={{ borderRight: "1px solid var(--border-subtle)" }}
+        {...props}
+      />
+    ),
+    td: (props) => (
+      <td
+        className="text-[var(--text-secondary)] px-3 py-2 align-top"
+        style={{ borderRight: "1px solid var(--border-subtle)" }}
+        {...props}
+      />
+    ),
   };
 }
