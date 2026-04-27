@@ -16,7 +16,12 @@ Running a Science Olympiad tournament means coordinating dozens of volunteers ac
 time slots, and shifting availability. Most tournament directors still manage all of this through 
 a patchwork of Google Forms, spreadsheets, and email chains — there's no dedicated tool for it.
 
-<ProjectImage src="images/nexus-sync-pipeline.png" caption="image" />
+<ProjectImage
+  src="/images/nexus-sync-pipeline.png"
+  caption="Sync diagram: data is imported from the Google APIs, then is processed via the sheet
+   configuration before finally saving in the PostgreSQL database"
+  padding={true}
+/>
 
 NEXUS is the platform I'm building to replace that entire workflow, from volunteer intake 
 through day-of logistics. It's designed to scale to hundreds of tournaments and thousands of 

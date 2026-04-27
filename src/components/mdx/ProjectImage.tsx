@@ -2,13 +2,14 @@ type Props = {
   src: string;
   alt?: string;
   caption?: string;
+  padding?: boolean;
 };
 
-export default function ProjectImage({ src, alt = "", caption }: Props) {
+export default function ProjectImage({ src, alt = "", caption, padding }: Props) {
   return (
     <figure className="my-8 m-0">
       <div
-        className="rounded-[12px] overflow-hidden"
+        className={`rounded-[12px] overflow-hidden bg-white${padding ? " p-6" : ""}`}
         style={{ border: "1px solid var(--border)" }}
       >
         <img src={src} alt={alt} className="w-full object-cover block" />
