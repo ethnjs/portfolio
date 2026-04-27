@@ -10,6 +10,9 @@ const navItems = [
 ];
 
 const TRACKED = ["projects", "about", "skills"];
+const PADDING_X = { base: 24, hover: 28 };
+const PADDING_Y = { base: 8, hover: 10 };
+const GAP = { base: 4, hover: 6 };
 
 export default function FloatingNav() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
@@ -19,6 +22,10 @@ export default function FloatingNav() {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLElement | null)[]>([]);
+  // While a click-driven smooth scroll is in flight, freeze the active section
+  // so mid-flight scroll readings can't override the user's intent.
+  const programmaticScroll = useRef(false);
+  const scrollSettleTimer = useRef<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,11 +33,19 @@ export default function FloatingNav() {
       const pastHero = window.scrollY > heroH * 0.7;
       setVisible(pastHero);
 
+      if (programmaticScroll.current) {
+        if (scrollSettleTimer.current) window.clearTimeout(scrollSettleTimer.current);
+        scrollSettleTimer.current = window.setTimeout(() => {
+          programmaticScroll.current = false;
+        }, 150);
+        return;
+      }
+
       let active: string | null = null;
       for (const id of TRACKED) {
         const el = document.getElementById(id);
         if (!el) continue;
-        if (el.getBoundingClientRect().top <= 0) active = id;
+        if (el.getBoundingClientRect().top <= 1) active = id;
       }
 
       setActiveSection(pastHero ? active : null);
@@ -40,21 +55,33 @@ export default function FloatingNav() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Reposition the outline pill whenever active section or hover (padding) changes
+  // Reposition the outline pill whenever active section or hover (padding) changes.
+  // Compute left analytically from the final hover state instead of reading offsetLeft —
+  // the parent's padding/gap is mid-transition, so offsetLeft would be a stale value.
   useLayoutEffect(() => {
     const activeIndex = navItems.findIndex(({ href }) => href.replace("#", "") === activeSection);
     if (activeIndex === -1) {
       setPill((p) => ({ ...p, opacity: 0 }));
       return;
     }
-    const el = itemRefs.current[activeIndex];
-    if (!el) return;
-    setPill({ left: el.offsetLeft, width: el.offsetWidth, opacity: 1 });
+    const widths = itemRefs.current.map((el) => el?.offsetWidth ?? 0);
+    const padX = hovered ? PADDING_X.hover : PADDING_X.base;
+    const gap = hovered ? GAP.hover : GAP.base;
+    let left = padX;
+    for (let i = 0; i < activeIndex; i++) left += widths[i] + gap;
+    setPill({ left, width: widths[activeIndex] ?? 0, opacity: 1 });
   }, [activeSection, hovered]);
 
   const handleClick = (href: string) => {
     if (!href.startsWith("#")) return;
-    document.getElementById(href.slice(1))?.scrollIntoView({ behavior: "smooth" });
+    const id = href.slice(1);
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (TRACKED.includes(id)) {
+      setActiveSection(id);
+      programmaticScroll.current = true;
+    }
+    el.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -71,8 +98,8 @@ export default function FloatingNav() {
           border: "1px solid var(--border)",
           borderRadius: "9999px",
           boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
-          padding: hovered ? "10px 28px" : "8px 24px",
-          gap: hovered ? "6px" : "4px",
+          padding: `${hovered ? PADDING_Y.hover : PADDING_Y.base}px ${hovered ? PADDING_X.hover : PADDING_X.base}px`,
+          gap: `${hovered ? GAP.hover : GAP.base}px`,
         }}
       >
         {/* Sliding glow-gradient indicator */}
