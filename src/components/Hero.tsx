@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import ScrollArrow from "./ScrollArrow";
 import { hero } from "@/data/portfolio";
 
-export default function HeroSection({ access }: { access: boolean }) {
+export default function HeroSection() {
   const [copied, setCopied] = useState(false);
   const [edgesVisible, setEdgesVisible] = useState(true);
 
@@ -77,7 +77,7 @@ export default function HeroSection({ access }: { access: boolean }) {
         ))}
       </div>
 
-      {access && <ScrollArrow />}
+      <ScrollArrow />
     </section>
   );
 }

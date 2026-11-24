@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "generate-key": "tsx scripts/generate-key.ts"
+    "lint": "eslint"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
@@ -27,12 +26,10 @@
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.22",
     "babel-plugin-react-compiler": "1.0.0",
-    "dotenv": "^16",
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
-    "tsx": "^4",
     "typescript": "^5"
   }
 }

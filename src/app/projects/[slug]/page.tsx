@@ -1,6 +1,5 @@
-import { redirect, notFound } from "next/navigation";
+import { notFound } from "next/navigation";
 import Link from "next/link";
-import { hasAccess } from "@/lib/auth";
 import { projectModules } from "@/lib/projects";
 import ProjectLinks from "@/components/mdx/ProjectLinks";
 import type { ProjectMeta } from "@/types/project";
@@ -10,9 +9,6 @@ import type { ComponentType } from "react";
 type PageProps = { params: Promise<{ slug: string }> };
 
 export default async function ProjectPage({ params }: PageProps) {
-  const access = await hasAccess();
-  if (!access) redirect("/");
-
   const { slug } = await params;
   if (!(slug in projectModules)) notFound();
 
