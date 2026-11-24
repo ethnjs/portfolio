@@ -35,7 +35,7 @@
   --text-muted:     #8a857b;
   --accent:         #26262a;
   --red:            #cf3f28;
-  --glow:           none;
+  --glow:           drop-shadow(0 0 8px rgba(38,38,42,0.7)) drop-shadow(0 0 18px rgba(38,38,42,0.3));
 }
 
 /* anchor jumps are eased by Lenis (see SmoothScroll.tsx) */
