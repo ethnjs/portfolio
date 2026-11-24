@@ -2,7 +2,7 @@ export const hero = {
   greeting: "hi my name is",
   name: "Ethan Shih",
   tagline: "computer science and engineering @ uci",
-  email: "ethnj.shih@gmail.com",
+  email: "hi@ethanshih.com",
   links: [
     { label: "LinkedIn", url: "https://www.linkedin.com/in/ethanshih1", icon: "fab fa-linkedin" },
     { label: "GitHub",   url: "https://github.com/ethnjs",              icon: "fab fa-github"   },

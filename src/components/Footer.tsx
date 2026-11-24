@@ -12,10 +12,7 @@ export default function Footer() {
   };
 
   return (
-    <footer
-      className="w-full mt-16 pt-8 pb-24 px-8"
-      style={{ borderTop: "1px solid var(--border-subtle)" }}
-    >
+    <footer className="w-full pt-4 pb-16 px-8">
       <div className="max-w-[800px] mx-auto flex flex-col gap-5">
 
         {/* Contact row */}
@@ -23,7 +20,7 @@ export default function Footer() {
           {/* Email */}
           <div className="relative">
             <div
-              className={`absolute -top-8 left-0 bg-white text-black px-3 py-1 rounded-md text-xs font-bold transition-all duration-300 whitespace-nowrap ${
+              className={`absolute -top-8 left-0 bg-[var(--text-primary)] text-[var(--bg)] px-3 py-1 rounded-md text-xs font-bold transition-all duration-300 whitespace-nowrap ${
                 copied ? "opacity-100 translate-y-0 visible" : "opacity-0 translate-y-1 invisible"
               }`}
             >
@@ -58,10 +55,10 @@ export default function Footer() {
         {/* Bottom row */}
         <div className="flex flex-wrap items-center justify-between gap-3">
           <span className="text-xs text-[var(--text-muted)]">
-            © {new Date().getFullYear()} Ethan Shih
+            © {new Date().getFullYear()} ethan shih
           </span>
           <span className="text-xs text-[var(--text-muted)] opacity-60">
-            made with Next.js · TypeScript · Tailwind CSS
+            made with next.js · typescript · tailwind
           </span>
         </div>
 
