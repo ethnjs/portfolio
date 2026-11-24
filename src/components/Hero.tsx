@@ -1,11 +1,11 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { hero } from "@/data/portfolio";
+import CopyEmail from "./CopyEmail";
 import PhotoBackdrop from "./PhotoBackdrop";
 import ThemeToggle from "./ThemeToggle";
 
 export default function HeroSection() {
-  const [copied, setCopied] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   // Scroll-linked fade: --hero-fade goes 0 -> 1 over the first ~60% of the
@@ -30,11 +30,6 @@ export default function HeroSection() {
     };
   }, []);
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(hero.email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   return (
     <section ref={sectionRef} id="welcome" className="hero relative h-screen overflow-hidden">
@@ -46,7 +41,7 @@ export default function HeroSection() {
         {/* Top: where the photo was taken / day-night */}
         <div className="flex items-start justify-between">
           <span className="text-[0.85rem] tracking-[0.01em] text-[var(--text-secondary)]">
-            九份 · jiufen, taiwan
+            九份 jiufen, taiwan
           </span>
           <ThemeToggle />
         </div>
@@ -66,22 +61,7 @@ export default function HeroSection() {
           </div>
 
           <div className="flex flex-col items-start gap-4 md:items-end">
-            <div className="relative">
-              <div
-                className={`absolute -top-9 right-0 bg-[var(--text-primary)] text-[var(--bg)] px-3 py-1 rounded-md text-xs font-bold transition-all duration-300 whitespace-nowrap ${
-                  copied ? "opacity-100 translate-y-0 visible" : "opacity-0 translate-y-2 invisible"
-                }`}
-              >
-                copied!
-              </div>
-              <button
-                onClick={handleCopy}
-                className="neon-glow-hover text-[0.85rem] cursor-pointer tracking-[0.01em]"
-                title="copy to clipboard"
-              >
-                {hero.email}
-              </button>
-            </div>
+            <CopyEmail className="text-left md:text-right text-[0.85rem] tracking-[0.01em]" />
             <div className="flex items-center gap-6">
               {hero.links.map((link) => (
                 <a
