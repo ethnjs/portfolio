@@ -38,9 +38,7 @@
   --glow:           none;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+/* anchor jumps are eased by Lenis (see SmoothScroll.tsx) */
 
 /* day <-> night crossfade (see ThemeToggle) */
 ::view-transition-old(root),

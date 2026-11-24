@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
 
 
 const inter = Inter({
@@ -41,6 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></link>
       </head>
       <body className={`${inter.variable} ${citadel.variable} font-inter antialiased`}>
+        <SmoothScroll />
         {children}
         <Analytics />
       </body>
