@@ -13,7 +13,7 @@ export default function Footer() {
 
   return (
     <footer className="w-full pt-4 pb-16 px-8">
-      <div className="max-w-[800px] mx-auto flex flex-col gap-5">
+      <div className="max-w-[880px] mx-auto flex flex-col gap-5">
 
         {/* Contact row */}
         <div className="flex flex-wrap items-center justify-between gap-4">

@@ -1,17 +1,33 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { hero } from "@/data/portfolio";
 import PhotoBackdrop from "./PhotoBackdrop";
 import ThemeToggle from "./ThemeToggle";
 
 export default function HeroSection() {
   const [copied, setCopied] = useState(false);
-  const [edgesVisible, setEdgesVisible] = useState(true);
+  const sectionRef = useRef<HTMLElement>(null);
 
+  // Scroll-linked fade: --hero-fade goes 0 -> 1 over the first ~60% of the
+  // viewport. The text drifts up and fades out first, the photo follows.
   useEffect(() => {
-    const handleScroll = () => setEdgesVisible(window.scrollY <= 80);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const section = sectionRef.current!;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const p = Math.min(1, Math.max(0, window.scrollY / (window.innerHeight * 0.6)));
+      section.style.setProperty("--hero-fade", p.toFixed(3));
+      section.dataset.faded = p > 0.55 ? "true" : "false";
+    };
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   const handleCopy = () => {
@@ -20,17 +36,15 @@ export default function HeroSection() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const fadeClass = edgesVisible
-    ? "opacity-100 translate-y-0"
-    : "opacity-0 translate-y-4 pointer-events-none";
-
   return (
-    <section id="welcome" className="relative h-screen overflow-hidden">
-      <PhotoBackdrop src="/images/jiufen.jpg" />
+    <section ref={sectionRef} id="welcome" className="hero relative h-screen overflow-hidden">
+      <div className="hero-photo absolute inset-0">
+        <PhotoBackdrop src="/images/jiufen.jpg" />
+      </div>
 
-      <div className="relative z-10 flex h-full flex-col justify-between p-8 md:p-10">
+      <div className="hero-content relative z-10 flex h-full flex-col justify-between p-8 md:p-10">
         {/* Top: where the photo was taken / day-night */}
-        <div className={`flex items-start justify-between transition-all duration-500 ${fadeClass}`}>
+        <div className="flex items-start justify-between">
           <span className="text-[0.85rem] tracking-[0.01em] text-[var(--text-secondary)]">
             九份 · jiufen, taiwan
           </span>
@@ -51,7 +65,7 @@ export default function HeroSection() {
             </p>
           </div>
 
-          <div className={`flex flex-col items-start gap-4 md:items-end transition-all duration-500 ${fadeClass}`}>
+          <div className="flex flex-col items-start gap-4 md:items-end">
             <div className="relative">
               <div
                 className={`absolute -top-9 right-0 bg-[var(--text-primary)] text-[var(--bg)] px-3 py-1 rounded-md text-xs font-bold transition-all duration-300 whitespace-nowrap ${

@@ -49,6 +49,15 @@ html {
   animation-timing-function: ease-in-out;
 }
 
+/* hero fades away as you scroll (see Hero.tsx) */
+.hero { --hero-fade: 0; }
+.hero-content {
+  opacity: calc(1 - var(--hero-fade) * 1.5);
+  transform: translateY(calc(var(--hero-fade) * -40px));
+}
+.hero-photo { opacity: calc(1 - var(--hero-fade) * 0.85); }
+.hero[data-faded="true"] .hero-content { pointer-events: none; }
+
 /* the toggle is left out of the crossfade and animates on its own */
 .theme-toggle { view-transition-name: theme-toggle; }
 ::view-transition-group(theme-toggle),
