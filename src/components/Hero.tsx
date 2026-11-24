@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import ScrollArrow from "./ScrollArrow";
 import { hero } from "@/data/portfolio";
 
 export default function HeroSection() {
@@ -77,7 +76,6 @@ export default function HeroSection() {
         ))}
       </div>
 
-      <ScrollArrow />
     </section>
   );
 }
